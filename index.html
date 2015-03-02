@@ -1,0 +1,59 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<title>Projektor Webcontrol</title>
+	
+	<meta name="viewport" content="width=device-width, initial-scale=1">
+	<meta http-equiv="content-type" content="text/html; charset=UTF-8">
+	<meta http-equiv="content-language" content="de">
+
+	<link rel="stylesheet" type="text/css" href="css/jquery.mobile.icons.min.css">
+	<link rel="stylesheet" type="text/css" href="css/jquery.mobile.custom.structure.min.css">
+	<link rel="stylesheet" type="text/css" href="css/jq_m_monkey_theme.min.css">
+	<link rel="stylesheet" type="text/css" href="css/main.css">
+	<script type="text/javascript" src="js/jquery-1.11.2.min.js"></script>
+	<script type="text/javascript" src="js/jquery.mobile.custom.min.js"></script>
+</head>
+<body data-theme="a">
+
+	<div data-role="header">
+		<h1>Projektor Webcontrol</h1>
+	</div>
+
+	<div data-role="tabs" id="tabs">
+
+		<div data-role="navbar">
+			<ul>
+				<li><a href="#107" class="ui-btn-active">Raum 107</a></li>
+				<li><a href="#108">Raum 108</a></li>
+			</ul>
+		</div> <!-- /navbar -->
+
+		<div id="107" class="ui-content">
+			<div data-role="collapsibleset" data-inset="false" data-corners="false">
+				<div data-role="collapsible">
+					<h3>Raumplan</h3>
+					<div class="center-content"><img alt="Raumplan" src="img/map_107.png"></div>
+				</div>
+				<div data-role="collapsible">
+					<h3>Projektor 1</h3>
+					<div>Hui!</div>
+				</div>
+				<div data-role="collapsible">
+					<h3>Projektor 2</h3>
+					<div>Lalala</div>
+				</div>
+				<div data-role="collapsible">
+					<h3>Projektor 3</h3>
+					<div>Oha.</div>
+				</div> 
+			</div> <!-- /collapsibleset -->
+		</div> <!-- /107 -->
+
+		<div id="108" class="ui-content">
+			Hier würde der gleiche Content analog zu Raum 107 stehen.
+		</div> <!-- /108 -->
+
+	</div> <!-- /tabs -->
+</body>
+</html>
