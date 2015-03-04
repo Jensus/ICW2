@@ -48,7 +48,7 @@
 						<span class="grid-caption">Helligkeit</span>
 						<div class="ui-grid-b">
 							<div class="ui-block-a"><button class="ui-btn ui-corner-all" onClick="decreaseValue(this, 5);"><span class="button-caption">&#8211;</span></button></div>
-							<div class="ui-block-b"><input name="brightness" id="input-brightness" value="50" onChange="sendValue(this);" type="text" placeholder="Helligkeit"></div>
+							<div class="ui-block-b"><input name="brightness" id="input-brightness" value="50" onChange="correctValue(this); sendValue(this);" type="text" placeholder="Helligkeit"></div>
 							<div class="ui-block-c"><button class="ui-btn ui-corner-all" onClick="increaseValue(this, 5);"><span class="button-caption">+</span></button></div>
 						</div>
 					</div>
@@ -56,7 +56,7 @@
 						<span class="grid-caption">Sättigung</span>
 						<div class="ui-grid-b">
 							<div class="ui-block-a"><button class="ui-btn ui-corner-all" onClick="decreaseValue(this, 5);"><span class="button-caption">&#8211;</span></button></div>
-							<div class="ui-block-b"><input name="saturation" id="input-saturation" value="50" onChange="sendValue(this);" type="text" placeholder="Sättigung"></div>
+							<div class="ui-block-b"><input name="saturation" id="input-saturation" value="50" onChange="correctValue(this); sendValue(this);" type="text" placeholder="Sättigung"></div>
 							<div class="ui-block-c"><button class="ui-btn ui-corner-all" onClick="increaseValue(this, 5);"><span class="button-caption">+</span></button></div>
 						</div>
 					</div>
