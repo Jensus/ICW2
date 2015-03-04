@@ -10,9 +10,14 @@
 	<link rel="stylesheet" type="text/css" href="css/jquery.mobile.icons.min.css">
 	<link rel="stylesheet" type="text/css" href="css/jquery.mobile.custom.structure.min.css">
 	<link rel="stylesheet" type="text/css" href="css/jq_m_monkey_theme.min.css">
+	<link rel="stylesheet" type="text/css" href="css/toastr/toastr.min.css">
 	<link rel="stylesheet" type="text/css" href="css/main.css">
+
 	<script type="text/javascript" src="js/jquery-1.11.2.min.js"></script>
 	<script type="text/javascript" src="js/jquery.mobile.custom.min.js"></script>
+	<script type="text/javascript" src="js/toastr/toastr.min.js"></script>
+	<script type="text/javascript" src="js/toastr/toastr_conf.js"></script>
+	<script type="text/javascript" src="js/main.js"></script>
 </head>
 <body data-theme="a">
 
@@ -24,8 +29,10 @@
 
 		<div data-role="navbar">
 			<ul>
-				<li><a href="#107" class="ui-btn-active">Raum 107</a></li>
-				<li><a href="#108">Raum 108</a></li>
+				<li><a href="#107" class="ui-btn-active">107</a></li>
+				<li><a href="#106">106</a></li>
+				<li><a href="#207">207</a></li>
+				<li><a href="#206">206</a></li>
 			</ul>
 		</div> <!-- /navbar -->
 
@@ -37,7 +44,22 @@
 				</div>
 				<div data-role="collapsible">
 					<h3>Projektor 1</h3>
-					<div>Hui!</div>
+					<div>
+						<span class="grid-caption">Helligkeit</span>
+						<div class="ui-grid-b">
+							<div class="ui-block-a"><button class="ui-btn ui-corner-all" onClick="decreaseValue(this, 5);"><span class="button-caption">&#8211;</span></button></div>
+							<div class="ui-block-b"><input name="brightness" id="input-brightness" value="50" onChange="sendValue(this);" type="text" placeholder="Helligkeit"></div>
+							<div class="ui-block-c"><button class="ui-btn ui-corner-all" onClick="increaseValue(this, 5);"><span class="button-caption">+</span></button></div>
+						</div>
+					</div>
+					<div>
+						<span class="grid-caption">Sättigung</span>
+						<div class="ui-grid-b">
+							<div class="ui-block-a"><button class="ui-btn ui-corner-all" onClick="decreaseValue(this, 5);"><span class="button-caption">&#8211;</span></button></div>
+							<div class="ui-block-b"><input name="saturation" id="input-saturation" value="50" onChange="sendValue(this);" type="text" placeholder="Sättigung"></div>
+							<div class="ui-block-c"><button class="ui-btn ui-corner-all" onClick="increaseValue(this, 5);"><span class="button-caption">+</span></button></div>
+						</div>
+					</div>
 				</div>
 				<div data-role="collapsible">
 					<h3>Projektor 2</h3>
@@ -50,7 +72,7 @@
 			</div> <!-- /collapsibleset -->
 		</div> <!-- /107 -->
 
-		<div id="108" class="ui-content">
+		<div id="106" class="ui-content">
 			Hier würde der gleiche Content analog zu Raum 107 stehen.
 		</div> <!-- /108 -->
 
