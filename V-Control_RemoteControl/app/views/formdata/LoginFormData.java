@@ -26,7 +26,6 @@ public class LoginFormData {
    * @return Null if valid, or a List[ValidationError] if problems found.
    */
   public List<ValidationError> validate() {
-
     List<ValidationError> errors = new ArrayList<>();
     
     if (!UserInfoDB.isValid(email, password)) {
@@ -34,7 +33,7 @@ public class LoginFormData {
       errors.add(new ValidationError("password", ""));      
     }
 
-    return (errors.size() > 0) ? errors : null;
+    return errors;
   }
 
 }
