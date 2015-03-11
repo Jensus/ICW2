@@ -12,6 +12,8 @@ import utils.MonkeyEncryption;
 
 import java.io.*;
 import java.net.*;
+import java.util.HashMap;
+import java.util.Map;
 
 /**
  * Implements the controllers for this application.
@@ -67,6 +69,29 @@ public class Application extends Controller {
 		return redirect(controllers.routes.Application.index());
 	}
 	
+	public static Map splitVControlResponse(String response) {
+		Map responseMap = new HashMap();
+
+		String[] splittedResponse = response.split(""+(char)5, -1);
+		String responseType = splittedResponse[0];
+		String eventModule = splittedResponse[1];
+		String eventParams = splittedResponse[2];
+		splittedResponse = eventParams.split(""+(char)2, -1);
+		String eventDevice = splittedResponse[0];
+		String eventChannel = splittedResponse[1];
+		String eventCmd = splittedResponse[2];
+		String eventData = splittedResponse[9];
+
+		responseMap.put("MsgType", responseType);
+		responseMap.put("EventModule", eventModule);
+		responseMap.put("EventDevice", eventDevice);
+		responseMap.put("EventChannel", eventChannel);
+		responseMap.put("EventCmd", eventCmd);
+		responseMap.put("EventData", eventData);
+		System.out.println(responseMap);
+		return responseMap;
+	}
+
 	/**
 	 * Provides the webControl page (only to authenticated users).
 	 * @return The webControl page. 
@@ -78,7 +103,7 @@ public class Application extends Controller {
 		try
 		{
 			BufferedReader inFromUser = new BufferedReader( new InputStreamReader(System.in));
-			Socket vcontrol = new Socket("141.45.207.253", 10101);
+			Socket vcontrol = new Socket("127.0.0.1", 10101);
 			DataOutputStream outToServer = new DataOutputStream(vcontrol.getOutputStream());
 			DataInputStream inFromServer = new DataInputStream(vcontrol.getInputStream());
 			vcontrol.setSoTimeout(5000);
@@ -105,6 +130,7 @@ public class Application extends Controller {
 			inFromServer.read(response);
 			String str = new String(response, "UTF-8");
 			System.out.println("FROM SERVER: " + str);
+			Map foo = splitVControlResponse(str);
 			vcontrol.close();
 		}
 		catch (Exception ex){ System.out.println("Socket Exception: " + ex); }*/
