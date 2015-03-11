@@ -4,8 +4,7 @@ import play.data.Form;
 import play.mvc.Controller;
 import play.mvc.Result;
 import views.html.Index;
-import views.html.Profile;
-import views.html.Login;
+import views.html.WebControl;
 import views.formdata.LoginFormData;
 import play.mvc.Security;
 
@@ -24,18 +23,10 @@ public class Application extends Controller {
 	 * @return The Index page. 
 	 */
 	public static Result index() {
-		return ok(Index.render("Home", Secured.isLoggedIn(ctx()), Secured.getUserInfo(ctx())));
+		Form<LoginFormData> dummy = new Form(LoginFormData.class).bindFromRequest();
+		return ok(Index.render("Home", Secured.isLoggedIn(ctx()), Secured.getUserInfo(ctx()), dummy));
 	}
 	
-	/**
-	 * Provides the Login page (only to unauthenticated users). 
-	 * @return The Login page. 
-	 */
-	public static Result login() {
-		Form<LoginFormData> formData = Form.form(LoginFormData.class);
-		return ok(Login.render("Login", Secured.isLoggedIn(ctx()), Secured.getUserInfo(ctx()), formData));
-	}
-
 	/**
 	 * Processes a login form submission from an unauthenticated user. 
 	 * First we bind the HTTP POST data to an instance of LoginFormData.
@@ -55,13 +46,13 @@ public class Application extends Controller {
 
 		if (formData.validate().size() > 0) {
 			flash("error", "Login credentials not valid.");
-			return badRequest(Login.render("Login", Secured.isLoggedIn(ctx()), Secured.getUserInfo(ctx()), dummy));
+			return badRequest(Index.render("Login", Secured.isLoggedIn(ctx()), Secured.getUserInfo(ctx()), dummy));
 		}
 		else {
 			// email/password OK, so now we set the session variable and only go to authenticated pages.
 			session().clear();
 			session("email", formData.email);
-			return redirect(routes.Application.profile());
+			return redirect(routes.Application.webControl());
 		}
 	}
 	
@@ -72,16 +63,17 @@ public class Application extends Controller {
 	@Security.Authenticated(Secured.class)
 	public static Result logout() {
 		session().clear();
-		return redirect(routes.Application.index());
+		//return redirect(routes.Application.index());
+		return redirect(controllers.routes.Application.index());
 	}
 	
 	/**
-	 * Provides the Profile page (only to authenticated users).
-	 * @return The Profile page. 
+	 * Provides the webControl page (only to authenticated users).
+	 * @return The webControl page. 
 	 */
 	@Security.Authenticated(Secured.class)
-	public static Result profile() {
-		String sentence;
+	public static Result webControl() {
+		/*String sentence;
 		byte[] response = new byte[256];
 		try
 		{
@@ -115,7 +107,14 @@ public class Application extends Controller {
 			System.out.println("FROM SERVER: " + str);
 			vcontrol.close();
 		}
-		catch (Exception ex){ System.out.println("Socket Exception: " + ex); }
-		return ok(Profile.render("Profile", Secured.isLoggedIn(ctx()), Secured.getUserInfo(ctx())));
+		catch (Exception ex){ System.out.println("Socket Exception: " + ex); }*/
+		return ok(WebControl.render("webControl", Secured.isLoggedIn(ctx()), Secured.getUserInfo(ctx())));
+	}
+
+	@Security.Authenticated(Secured.class)
+	public static Result sendCommand(String foo, String bar)
+	{
+		System.out.println("Foo: " + foo + "; Bar: " + bar);
+		return ok("Hallo " + foo + " " + bar + "!");
 	}
 }

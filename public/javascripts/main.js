@@ -1,5 +1,4 @@
-$(document).ready(function(){
-
+$(document).ready(function() {
 });
 
 function decreaseValue(caller, number)
@@ -21,7 +20,12 @@ function correctValue(caller)
 	if (parseInt(that.val()) < 0) that.val(0);
 }
 
-function sendValue(caller)
+function prepareCommand(caller)
 {
-	console.log('Sende ' + $(caller).prop('name') + ': ' + $(caller).val());
+
+}
+
+function command(p1, p2)
+{
+	$.get('/sendCommand', {'foo': p1, 'bar': p2}, function(data) { alert(data); });
 }

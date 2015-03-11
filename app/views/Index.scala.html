@@ -1,0 +1,22 @@
+@(page: String, isLoggedIn: Boolean, userInfo: UserInfo, loginForm: Form[views.formdata.LoginFormData])
+
+@Main(page, isLoggedIn, userInfo) {
+	@if(flash.containsKey("error")) {
+		<div id="error-message" class="text-danger">
+			@flash.get("error")
+		</div>
+	}
+	<form action="@routes.Application.postLogin()" method="post">
+		<div class="with-margin">
+			<label class="left-padding" for="tb-email">E-Mail</label>
+			<input name="email" id="tb-email" value="" type="text" placeholder="E-Mail">
+		</div>
+		<div class="with-margin">
+			<label class="left-padding" for="tb-password">Passwort</label>
+			<input data-clear-btn="false" name="password" id="tb-password" value="" autocomplete="off" type="password" placeholder="Passwort">
+		</div>
+		<div class="with-margin-big">
+			<input class="ui-btn" id="btn-login" value="Login" type="submit">
+		</div>
+	</form>
+}

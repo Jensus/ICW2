@@ -1,31 +1,7 @@
-<!DOCTYPE html>
-<html>
-<head>
-	<title>Projektor Webcontrol</title>
-	
-	<meta name="viewport" content="width=device-width, initial-scale=1">
-	<meta http-equiv="content-type" content="text/html; charset=UTF-8">
-	<meta http-equiv="content-language" content="de">
+@(page: String, isLoggedIn: Boolean, userInfo: UserInfo)
 
-	<link rel="stylesheet" type="text/css" href="css/jquery.mobile.icons.min.css">
-	<link rel="stylesheet" type="text/css" href="css/jquery.mobile.custom.structure.min.css">
-	<link rel="stylesheet" type="text/css" href="css/jq_m_monkey_theme.min.css">
-	<link rel="stylesheet" type="text/css" href="css/toastr/toastr.min.css">
-	<link rel="stylesheet" type="text/css" href="css/main.css">
-
-	<script type="text/javascript" src="js/jquery-1.11.2.min.js"></script>
-	<script type="text/javascript" src="js/jquery.mobile.custom.min.js"></script>
-	<script type="text/javascript" src="js/toastr/toastr.min.js"></script>
-	<script type="text/javascript" src="js/toastr/toastr_conf.js"></script>
-	<script type="text/javascript" src="js/main.js"></script>
-</head>
-<body data-theme="a">
-
-	<div data-role="header">
-		<h1>Projektor Webcontrol</h1>
-	</div>
-
-	<div data-role="tabs" id="tabs">
+@Main(page, isLoggedIn, userInfo) {
+   <div data-role="tabs" id="tabs">
 
 		<div data-role="navbar">
 			<ul>
@@ -40,7 +16,7 @@
 			<div data-role="collapsibleset" data-inset="false" data-corners="false">
 				<div data-role="collapsible">
 					<h3>Raumplan</h3>
-					<div class="center-content"><img alt="Raumplan" src="img/map_107.png"></div>
+					<div class="center-content"><img alt="Raumplan" src="@routes.Assets.at("/images/map_107.png")"></div>
 				</div>
 				<div data-role="collapsible">
 					<h3>Projektor 1</h3>
@@ -48,7 +24,7 @@
 						<span class="grid-caption">Helligkeit</span>
 						<div class="ui-grid-b">
 							<div class="ui-block-a"><button class="ui-btn ui-corner-all" onClick="decreaseValue(this, 5);"><span class="button-caption">&#8211;</span></button></div>
-							<div class="ui-block-b"><input name="brightness" id="input-brightness" value="50" onChange="correctValue(this); sendValue(this);" type="text" placeholder="Helligkeit"></div>
+							<div class="ui-block-b"><input name="brightness" id="input-brightness" value="50" onChange="correctValue(this); prepareCommand(this);" type="text" placeholder="Helligkeit"></div>
 							<div class="ui-block-c"><button class="ui-btn ui-corner-all" onClick="increaseValue(this, 5);"><span class="button-caption">+</span></button></div>
 						</div>
 					</div>
@@ -56,7 +32,7 @@
 						<span class="grid-caption">Sättigung</span>
 						<div class="ui-grid-b">
 							<div class="ui-block-a"><button class="ui-btn ui-corner-all" onClick="decreaseValue(this, 5);"><span class="button-caption">&#8211;</span></button></div>
-							<div class="ui-block-b"><input name="saturation" id="input-saturation" value="50" onChange="correctValue(this); sendValue(this);" type="text" placeholder="Sättigung"></div>
+							<div class="ui-block-b"><input name="saturation" id="input-saturation" value="50" onChange="correctValue(this); prepareCommand(this);" type="text" placeholder="Sättigung"></div>
 							<div class="ui-block-c"><button class="ui-btn ui-corner-all" onClick="increaseValue(this, 5);"><span class="button-caption">+</span></button></div>
 						</div>
 					</div>
@@ -77,5 +53,4 @@
 		</div> <!-- /108 -->
 
 	</div> <!-- /tabs -->
-</body>
-</html>
+}

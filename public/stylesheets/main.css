@@ -16,3 +16,18 @@
 	padding: 0 12px;
 	line-height: 1;
 }
+
+.with-margin
+{
+	padding: 12px;
+}
+
+.with-margin-big
+{
+	padding: 48px;
+}
+
+.left-padding
+{
+	padding-left: 12px;
+}
