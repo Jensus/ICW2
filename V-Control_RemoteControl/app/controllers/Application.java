@@ -11,6 +11,9 @@ import play.mvc.Security;
 
 import utils.MonkeyEncryption;
 
+import java.io.*;
+import java.net.*;
+
 /**
  * Implements the controllers for this application.
  */
@@ -78,6 +81,41 @@ public class Application extends Controller {
 	 */
 	@Security.Authenticated(Secured.class)
 	public static Result profile() {
+		String sentence;
+		byte[] response = new byte[256];
+		try
+		{
+			BufferedReader inFromUser = new BufferedReader( new InputStreamReader(System.in));
+			Socket vcontrol = new Socket("141.45.207.253", 10101);
+			DataOutputStream outToServer = new DataOutputStream(vcontrol.getOutputStream());
+			DataInputStream inFromServer = new DataInputStream(vcontrol.getInputStream());
+			vcontrol.setSoTimeout(5000);
+
+			String deviceName = "Dummy Projector_2";
+			String channelList = "dummy2";
+			String command = "GetVolume";
+			String dp1 = "";
+			String dp2 = "";
+			String p1 = "";
+			String p2 = "";
+			String p3 = "";
+			String p4 = ""; //Dummy Projector_2', 'dummy2', 'GetPower'
+
+			sentence = (char)4 + "0" + (char)5 + "devRunCommand" + (char)5 + deviceName + (char)2 + channelList + (char)2 + command + (char)2 + dp1 + (char)2 + dp2 + (char)2 + p1 + (char)2 + p2 + (char)2 + p3 + (char)2 + p4 + (char)6;
+			if (vcontrol.isConnected())
+			{
+				outToServer.writeBytes(sentence);
+				System.out.println("Wrote Command to Server.");
+				System.out.println("Command: " + sentence);
+			}
+			else
+				System.out.println("Not connected.");
+			inFromServer.read(response);
+			String str = new String(response, "UTF-8");
+			System.out.println("FROM SERVER: " + str);
+			vcontrol.close();
+		}
+		catch (Exception ex){ System.out.println("Socket Exception: " + ex); }
 		return ok(Profile.render("Profile", Secured.isLoggedIn(ctx()), Secured.getUserInfo(ctx())));
 	}
 }
