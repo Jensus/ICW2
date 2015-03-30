@@ -98,7 +98,15 @@ public class Application extends Controller {
 	 */
 	@Security.Authenticated(Secured.class)
 	public static Result webControl() {
-		/*String sentence;
+		return ok(WebControl.render("webControl", Secured.isLoggedIn(ctx()), Secured.getUserInfo(ctx())));
+	}
+
+	@Security.Authenticated(Secured.class)
+	public static Result sendCommand(String device, String channel, String command, String p1, String p2)
+	{
+		String returnValue = "";
+		System.out.println("Device:" + device + "; Channel:" + channel + "; Command:" + command + "; p1: " + p1 + "; p2: " + p2);
+		String sentence;
 		byte[] response = new byte[256];
 		try
 		{
@@ -108,17 +116,13 @@ public class Application extends Controller {
 			DataInputStream inFromServer = new DataInputStream(vcontrol.getInputStream());
 			vcontrol.setSoTimeout(5000);
 
-			String deviceName = "Dummy Projector_2";
-			String channelList = "dummy2";
-			String command = "GetVolume";
 			String dp1 = "";
 			String dp2 = "";
-			String p1 = "";
-			String p2 = "";
 			String p3 = "";
 			String p4 = ""; //Dummy Projector_2', 'dummy2', 'GetPower'
 
-			sentence = (char)4 + "0" + (char)5 + "devRunCommand" + (char)5 + deviceName + (char)2 + channelList + (char)2 + command + (char)2 + dp1 + (char)2 + dp2 + (char)2 + p1 + (char)2 + p2 + (char)2 + p3 + (char)2 + p4 + (char)6;
+			sentence = (char)4 + "0" + (char)5 + "devRunCommand" + (char)5 + device + (char)2 + channel + (char)2 + command + (char)2 + dp1 + (char)2 + dp2 + (char)2 + p1 + (char)2 + p2 
++ (char)2 + p3 + (char)2 + p4 + (char)6;
 			if (vcontrol.isConnected())
 			{
 				outToServer.writeBytes(sentence);
@@ -130,17 +134,13 @@ public class Application extends Controller {
 			inFromServer.read(response);
 			String str = new String(response, "UTF-8");
 			System.out.println("FROM SERVER: " + str);
+			returnValue += str;
 			Map foo = splitVControlResponse(str);
 			vcontrol.close();
 		}
-		catch (Exception ex){ System.out.println("Socket Exception: " + ex); }*/
-		return ok(WebControl.render("webControl", Secured.isLoggedIn(ctx()), Secured.getUserInfo(ctx())));
-	}
-
-	@Security.Authenticated(Secured.class)
-	public static Result sendCommand(String device, String channel, String command, String p1, String p2)
-	{
-		System.out.println("Device:" + device + "; Channel:" + channel + "; Command:" + command + "; p1: " + p1 + "; p2: " + p2);
-		return ok("Hallo " + p1 + " " + p2 + "!");
+		catch (Exception ex) {
+			System.out.println("Socket Exception: " + ex);
+		}
+		return ok("Gesendet! Server meldet: " + returnValue);
 	}
 }
