@@ -21,6 +21,13 @@
 				<div data-role="collapsible">
 					<h3>Projektor 1</h3>
 					<div>
+						<span class="grid-caption">Power</span>
+						<div class="ui-grid-a ui-responsive">
+							<div class="ui-block-a"><button class="ui-btn ui-corner-all" onClick="decreaseValue(this, 5);"><span class="button-caption">An</span></button></div>
+							<div class="ui-block-b"><button class="ui-btn ui-corner-all" onClick="increaseValue(this, 5);"><span class="button-caption">Aus</span></button></div>
+						</div>
+					</div>
+					<div>
 						<span class="grid-caption">Helligkeit</span>
 						<div class="ui-grid-b">
 							<div class="ui-block-a"><button class="ui-btn ui-corner-all" onClick="decreaseValue(this, 5);"><span class="button-caption">&#8211;</span></button></div>
@@ -29,12 +36,33 @@
 						</div>
 					</div>
 					<div>
-						<span class="grid-caption">Sättigung</span>
+						<span class="grid-caption">Kontrast</span>
 						<div class="ui-grid-b">
 							<div class="ui-block-a"><button class="ui-btn ui-corner-all" onClick="decreaseValue(this, 5);"><span class="button-caption">&#8211;</span></button></div>
-							<div class="ui-block-b"><input name="saturation" id="input-saturation" value="50" onChange="correctValue(this); prepareCommand(this);" type="text" placeholder="Sättigung"></div>
+							<div class="ui-block-b"><input name="saturation" id="input-saturation" value="50" onChange="correctValue(this); prepareCommand(this);" type="text" 
+placeholder="Kontrast"></div>
 							<div class="ui-block-c"><button class="ui-btn ui-corner-all" onClick="increaseValue(this, 5);"><span class="button-caption">+</span></button></div>
 						</div>
+					</div>
+					<div>
+						<span class="grid-caption" for="select-colortemp">Farbtemperatur</span>
+						<select name="select-native-1" id="select-colortemp">
+							<option value="0">Warm</option>
+							<option value="1">Normal</option>
+							<option value="2">Kalt</option>
+							<option value="3">Kälter</option>
+							<option value="4">Am Kältesten</option>
+						</select>
+					</div>
+					<div>
+						<span class="grid-caption" for="select-source">Quelle</span>
+						<select name="select-native-1" id="select-source">
+							<option value="0">PC</option>
+							<option value="1">DVI/HDMI1</option>
+							<option value="2">HDMI2</option>
+							<option value="3">Video</option>
+							<option value="4">S-Video</option>
+						</select>
 					</div>
 				</div>
 				<div data-role="collapsible">
