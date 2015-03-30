@@ -138,9 +138,9 @@ public class Application extends Controller {
 	}
 
 	@Security.Authenticated(Secured.class)
-	public static Result sendCommand(String foo, String bar)
+	public static Result sendCommand(String device, String channel, String command, String p1, String p2)
 	{
-		System.out.println("Foo: " + foo + "; Bar: " + bar);
-		return ok("Hallo " + foo + " " + bar + "!");
+		System.out.println("Device:" + device + "; Channel:" + channel + "; Command:" + command + "; p1: " + p1 + "; p2: " + p2);
+		return ok("Hallo " + p1 + " " + p2 + "!");
 	}
 }

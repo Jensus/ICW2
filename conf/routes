@@ -5,7 +5,7 @@
 # Home page
 GET		/					controllers.Application.index()
 POST	/login				controllers.Application.postLogin()
-GET		/sendCommand		controllers.Application.sendCommand(foo: String, bar: String)
+GET		/sendCommand		controllers.Application.sendCommand(device: String, channel: String, command: String, p1: String, p2: String)
 GET		/webControl			controllers.Application.webControl()
 GET		/logout				controllers.Application.logout()
 
