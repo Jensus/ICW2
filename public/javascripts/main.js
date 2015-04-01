@@ -1,14 +1,31 @@
 var projector_names = {
-  '1' : 'Dummy Projector_1',
-  '2' : 'Dummy Projector_2',
-  '3' : 'Dummy Projector_3'
+  '1' : 'IN3118HD_1',
+  '2' : 'IN3118HD_2',
+  '3' : 'IN3118HD_3'
 };
 
 var projector_channels = {
-  '1' : 'dummy',
-  '2' : 'dummy2',
-  '3' : 'dummy3'
+  '1' : 'Channel1',
+  '2' : 'Channel2',
+  '3' : 'Channel3'
 };
+
+var input_select = {
+	'0' : 'PC',
+	'1' : 'DVI-HDMI1',
+	'2' : 'HDMI2',
+	'3' : 'Video',
+	'4' : 'S-Video'
+}
+
+var set_color_temp = {
+	'0' : 'Warm',
+	'1' : 'Normal',
+	'2' : 'Cool',
+	'3' : 'Cooler',
+	'4' : 'High Cool'
+};
+
 $(document).ready(function() {
 });
 
@@ -63,14 +80,14 @@ function prepareCommand(caller)
 	}
 	else if($(caller).attr('id') == 'select-colortemp')
 	{
-		command = 'SetColorTemperatur';
-		p1 = $(caller).val();
+		command = 'SetColorTemperature';
+		p1 = set_color_temp[$(caller).val()];
 		var id = $(caller).parent().parent().parent().parent().attr('id');
 	}
 	else if($(caller).attr('id') == 'select-source')
 	{
 		command = 'InputSelect';
-		p1 = $(caller).val();
+		p1 = input_select[$(caller).val()];
 		var id = $(caller).parent().parent().parent().parent().attr('id');
 	}
 	
